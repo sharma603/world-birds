@@ -1,0 +1,100 @@
+{
+  "doctype": "Workspace",
+  "name": "Delivery Management",
+  "label": "Delivery Management",
+  "title": "Delivery Management",
+  "app": "wob_delivery",
+  "module": "Delivery Management",
+  "icon": "truck",
+  "public": 1,
+  "is_hidden": 0,
+  "sequence_id": 1,
+  "roles": [
+    {
+      "role": "System Manager"
+    },
+    {
+      "role": "WOB Delivery Administrator"
+    },
+    {
+      "role": "WOB Delivery Manager"
+    },
+    {
+      "role": "WOB Delivery Dispatcher"
+    }
+  ],
+  "content": "[{\"id\": \"delivery-header\", \"type\": \"header\", \"data\": {\"text\": \"<span class=\\\"h4\\\">Delivery Management</span>\", \"col\": 12}}, {\"id\": \"delivery-card\", \"type\": \"card\", \"data\": {\"card_name\": \"Delivery Operations\", \"col\": 12}}]",
+  "links": [
+    {
+      "type": "Card Break",
+      "label": "Delivery Operations",
+      "link_count": 7
+    },
+    {
+      "type": "Link",
+      "label": "Delivery Dashboard",
+      "link_type": "Page",
+      "link_to": "wob-delivery-dashboard",
+      "is_query_report": 0
+    },
+    {
+      "type": "Link",
+      "label": "Delivery Orders",
+      "link_type": "DocType",
+      "link_to": "WOB Delivery Order",
+      "is_query_report": 0
+    },
+    {
+      "type": "Link",
+      "label": "Delivery Zones",
+      "link_type": "DocType",
+      "link_to": "WOB Delivery Zone",
+      "is_query_report": 0
+    },
+    {
+      "type": "Link",
+      "label": "Drivers",
+      "link_type": "DocType",
+      "link_to": "Driver",
+      "is_query_report": 0
+    },
+    {
+      "type": "Link",
+      "label": "Zone Assignments",
+      "link_type": "DocType",
+      "link_to": "WOB Driver Zone Assignment",
+      "is_query_report": 0
+    },
+    {
+      "type": "Link",
+      "label": "Delivery Assignment History",
+      "link_type": "DocType",
+      "link_to": "WOB Delivery Assignment History",
+      "is_query_report": 0
+    },
+    {
+      "type": "Link",
+      "label": "Delivery Reports",
+      "link_type": "Report",
+      "link_to": "WOB Delivery Register",
+      "is_query_report": 1
+    }
+  ],
+  "shortcuts": [
+    {
+      "label": "Delivery Dashboard",
+      "type": "Page",
+      "link_to": "wob-delivery-dashboard"
+    },
+    {
+      "label": "Delivery Orders",
+      "type": "DocType",
+      "link_to": "WOB Delivery Order"
+    },
+    {
+      "label": "Delivery Zones",
+      "type": "DocType",
+      "link_to": "WOB Delivery Zone"
+    }
+  ]
+}

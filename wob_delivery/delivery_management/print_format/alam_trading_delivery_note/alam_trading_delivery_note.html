@@ -1,0 +1,761 @@
+<style>
+/* Modern, Production-Ready A4 Delivery Note Print Format for Alam Trading, Qatar */
+@page {
+	size: A4;
+	margin: 10mm 12mm 12mm 12mm;
+}
+
+.alam-dn-wrapper {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+	color: #1e293b;
+	background: #ffffff;
+	font-size: 9.5px;
+	line-height: 1.45;
+	width: 100%;
+	max-width: 100%;
+	margin: 0 auto;
+	box-sizing: border-box;
+}
+
+.alam-dn-wrapper * {
+	box-sizing: border-box;
+}
+
+/* Header Section */
+.alam-header-container {
+	display: table;
+	width: 100%;
+	border-bottom: 2px solid #0f2942;
+	padding-bottom: 12px;
+	margin-bottom: 12px;
+}
+
+.alam-header-left {
+	display: table-cell;
+	width: 58%;
+	vertical-align: top;
+	text-align: left;
+}
+
+.alam-header-right {
+	display: table-cell;
+	width: 42%;
+	vertical-align: top;
+	text-align: right;
+}
+
+.company-logo {
+	max-height: 48px;
+	max-width: 180px;
+	object-fit: contain;
+	margin-bottom: 4px;
+	display: block;
+}
+
+.company-name {
+	font-size: 17px;
+	font-weight: 800;
+	color: #0f2942;
+	letter-spacing: -0.2px;
+	line-height: 1.2;
+	margin-bottom: 3px;
+}
+
+.company-details {
+	font-size: 9px;
+	color: #475569;
+	line-height: 1.4;
+}
+
+.company-details span {
+	font-weight: 600;
+	color: #334155;
+}
+
+.dn-title {
+	font-size: 20px;
+	font-weight: 800;
+	color: #0f2942;
+	letter-spacing: 0.5px;
+	text-transform: uppercase;
+	line-height: 1.1;
+	margin-bottom: 3px;
+}
+
+.dn-number {
+	font-size: 12px;
+	font-weight: 700;
+	color: #1e40af;
+	letter-spacing: 0.2px;
+	margin-bottom: 6px;
+}
+
+.dn-header-meta {
+	font-size: 9px;
+	color: #475569;
+	line-height: 1.45;
+}
+
+.meta-line {
+	margin-bottom: 2px;
+}
+
+.meta-label {
+	color: #64748b;
+	font-weight: 500;
+	margin-right: 4px;
+}
+
+.meta-value {
+	color: #0f172a;
+	font-weight: 700;
+}
+
+.status-badge {
+	display: inline-block;
+	font-size: 8.5px;
+	font-weight: 700;
+	text-transform: uppercase;
+	padding: 1px 7px;
+	border-radius: 10px;
+	letter-spacing: 0.3px;
+	margin-left: 4px;
+}
+
+.status-completed { background: #dcfce7; color: #15803d; border: 1px solid #bbf7d0; }
+.status-draft { background: #f1f5f9; color: #475569; border: 1px solid #cbd5e1; }
+.status-cancelled { background: #f1f5f9; color: #64748b; border: 1px solid #cbd5e1; }
+.status-to-bill { background: #eff6ff; color: #1d4ed8; border: 1px solid #bfdbfe; }
+.status-return { background: #fee2e2; color: #b91c1c; border: 1px solid #fecaca; }
+
+/* Customer & Details Cards */
+.alam-cards-table {
+	display: table;
+	width: 100%;
+	table-layout: fixed;
+	border-collapse: separate;
+	border-spacing: 10px 0;
+	margin-bottom: 12px;
+	margin-left: -10px;
+	margin-right: -10px;
+}
+
+.alam-card-cell {
+	display: table-cell;
+	width: 50%;
+	vertical-align: top;
+	background: #ffffff;
+	border: 1px solid #e2e8f0;
+	border-radius: 4px;
+	padding: 8px 10px;
+}
+
+.card-heading {
+	font-size: 9px;
+	font-weight: 700;
+	text-transform: uppercase;
+	color: #0f2942;
+	letter-spacing: 0.5px;
+	border-bottom: 1px solid #e2e8f0;
+	padding-bottom: 4px;
+	margin-bottom: 6px;
+}
+
+.customer-name {
+	font-size: 11px;
+	font-weight: 700;
+	color: #0f172a;
+	margin-bottom: 3px;
+}
+
+.customer-address {
+	font-size: 9px;
+	color: #475569;
+	line-height: 1.4;
+	margin-bottom: 4px;
+}
+
+.customer-contacts {
+	font-size: 8.5px;
+	color: #475569;
+	line-height: 1.35;
+}
+
+.customer-contacts span {
+	font-weight: 600;
+	color: #334155;
+}
+
+.details-grid {
+	width: 100%;
+	border-collapse: collapse;
+	font-size: 9px;
+}
+
+.details-grid td {
+	padding: 2px 0;
+	vertical-align: top;
+}
+
+.dt-label {
+	width: 44%;
+	color: #64748b;
+	font-weight: 500;
+}
+
+.dt-value {
+	width: 56%;
+	color: #0f172a;
+	font-weight: 600;
+	text-align: right;
+}
+
+/* Items Table */
+.items-table {
+	width: 100%;
+	border-collapse: collapse;
+	margin-bottom: 12px;
+}
+
+.items-table thead {
+	display: table-header-group;
+}
+
+.items-table th {
+	background: #f1f5f9;
+	color: #0f2942;
+	font-weight: 700;
+	font-size: 9px;
+	text-transform: uppercase;
+	letter-spacing: 0.3px;
+	padding: 6px 7px;
+	border: 1px solid #cbd5e1;
+}
+
+.items-table td {
+	padding: 6px 7px;
+	border: 1px solid #e2e8f0;
+	font-size: 9px;
+	vertical-align: top;
+	line-height: 1.35;
+}
+
+.items-table tbody tr {
+	page-break-inside: avoid;
+}
+
+.items-table tbody tr:nth-child(even) {
+	background: #f8fafc;
+}
+
+.item-name {
+	font-weight: 700;
+	color: #0f172a;
+	font-size: 9.5px;
+}
+
+.item-desc {
+	font-size: 8px;
+	color: #64748b;
+	margin-top: 2px;
+	line-height: 1.3;
+}
+
+.item-desc p {
+	margin: 0;
+}
+
+.item-code {
+	color: #475569;
+	font-size: 8.5px;
+}
+
+.item-amount {
+	font-weight: 700;
+	color: #0f172a;
+}
+
+/* Alignment utilities */
+.text-center { text-align: center; }
+.text-right { text-align: right; }
+.text-left { text-align: left; }
+.text-muted { color: #64748b; }
+.font-semibold { font-weight: 600; }
+
+/* Bottom Section */
+.bottom-container {
+	display: table;
+	width: 100%;
+	margin-bottom: 12px;
+	page-break-inside: avoid;
+}
+
+.bottom-left-cell {
+	display: table-cell;
+	width: 55%;
+	vertical-align: top;
+	padding-right: 14px;
+}
+
+.bottom-right-cell {
+	display: table-cell;
+	width: 45%;
+	vertical-align: top;
+}
+
+/* Summary Cards */
+.sub-card {
+	background: #ffffff;
+	border: 1px solid #e2e8f0;
+	border-radius: 4px;
+	padding: 6px 9px;
+	margin-bottom: 7px;
+	font-size: 8.5px;
+	line-height: 1.4;
+}
+
+.sub-card-title {
+	font-size: 8.5px;
+	font-weight: 700;
+	text-transform: uppercase;
+	color: #0f2942;
+	letter-spacing: 0.4px;
+	margin-bottom: 3px;
+	border-bottom: 1px solid #f1f5f9;
+	padding-bottom: 2px;
+}
+
+.sub-card-row {
+	display: flex;
+	justify-content: space-between;
+	margin-bottom: 2px;
+}
+
+.sub-card-lbl {
+	color: #64748b;
+}
+
+.sub-card-val {
+	font-weight: 600;
+	color: #0f172a;
+}
+
+/* Totals Table */
+.totals-table {
+	width: 100%;
+	border-collapse: collapse;
+	font-size: 9.5px;
+}
+
+.totals-table td {
+	padding: 4px 6px;
+	border-bottom: 1px solid #f1f5f9;
+}
+
+.tot-label {
+	color: #475569;
+	font-weight: 500;
+	text-align: left;
+}
+
+.tot-val {
+	font-weight: 600;
+	color: #0f172a;
+	text-align: right;
+}
+
+.grand-total-row td {
+	border-top: 2px solid #0f2942;
+	border-bottom: 2px solid #0f2942;
+	background: #f8fafc;
+	padding: 6px 6px;
+}
+
+.grand-total-label {
+	font-size: 11px;
+	font-weight: 800;
+	color: #0f2942;
+	letter-spacing: 0.3px;
+}
+
+.grand-total-val {
+	font-size: 12px;
+	font-weight: 800;
+	color: #0f2942;
+	text-align: right;
+}
+
+/* Signatures */
+.signatures-table {
+	display: table;
+	width: 100%;
+	table-layout: fixed;
+	margin-top: 14px;
+	margin-bottom: 12px;
+	page-break-inside: avoid;
+}
+
+.signature-cell {
+	display: table-cell;
+	width: 33.333%;
+	vertical-align: bottom;
+	text-align: center;
+	padding: 0 10px;
+}
+
+.sign-line {
+	border-bottom: 1px dashed #94a3b8;
+	margin-bottom: 4px;
+	height: 32px;
+}
+
+.sign-label {
+	font-size: 8.5px;
+	font-weight: 600;
+	color: #475569;
+	text-transform: uppercase;
+	letter-spacing: 0.3px;
+}
+
+/* Footer */
+.invoice-footer {
+	border-top: 1px solid #e2e8f0;
+	padding-top: 6px;
+	text-align: center;
+	font-size: 8px;
+	color: #64748b;
+	line-height: 1.35;
+	page-break-inside: avoid;
+}
+
+.footer-company {
+	font-weight: 700;
+	color: #0f2942;
+}
+
+.footer-thanks {
+	font-style: italic;
+	color: #475569;
+	margin-top: 1px;
+}
+
+.footer-details {
+	margin-top: 2px;
+	color: #64748b;
+}
+
+@media print {
+	body {
+		margin: 0;
+		padding: 0;
+		background: #ffffff !important;
+	}
+	.alam-dn-wrapper {
+		width: 100% !important;
+		max-width: 100% !important;
+		padding: 0 !important;
+	}
+	.no-print {
+		display: none !important;
+	}
+}
+</style>
+
+{% set company_name = doc.company or "Alam Trading" %}
+{% set company_doc = frappe.get_doc("Company", doc.company) if (doc.company and frappe.db.exists("Company", doc.company)) else None %}
+{% set currency = doc.currency or (company_doc.default_currency if company_doc else "QAR") %}
+
+<div class="alam-dn-wrapper">
+	<!-- 1. Header Section -->
+	<div class="alam-header-container">
+		<div class="alam-header-left">
+			{% if company_doc and company_doc.company_logo %}
+				<img src="{{ company_doc.company_logo }}" class="company-logo" alt="{{ company_name }}">
+			{% endif %}
+			<div class="company-name">{{ company_name }}</div>
+			<div class="company-details">
+				{% if doc.company_address_display %}
+					<div>{{ doc.company_address_display | striptags | replace('\n', ', ') }}</div>
+				{% elif company_doc and company_doc.country %}
+					<div>{{ company_doc.country }}</div>
+				{% endif %}
+				<div>
+					{% if company_doc and company_doc.phone_no %}
+						<span>Tel:</span> {{ company_doc.phone_no }}
+					{% endif %}
+					{% if company_doc and company_doc.email %}
+						{% if company_doc.phone_no %} &bull; {% endif %}<span>Email:</span> {{ company_doc.email }}
+					{% endif %}
+				</div>
+				<div>
+					{% if company_doc and company_doc.registration_details %}
+						<span>CR No.:</span> {{ company_doc.registration_details }}
+					{% endif %}
+					{% if company_doc and company_doc.tax_id %}
+						{% if company_doc.registration_details %} &bull; {% endif %}<span>Tax ID:</span> {{ company_doc.tax_id }}
+					{% endif %}
+				</div>
+			</div>
+		</div>
+
+		<div class="alam-header-right">
+			<div class="dn-title">
+				{% if doc.is_return %}
+					DELIVERY RETURN
+				{% else %}
+					DELIVERY NOTE
+				{% endif %}
+			</div>
+			<div class="dn-number">{{ doc.name }}</div>
+			<div class="dn-header-meta">
+				<div class="meta-line">
+					<span class="meta-label">Delivery Date:</span>
+					<span class="meta-value">{{ frappe.utils.format_date(doc.posting_date, "dd-MM-yyyy") if doc.posting_date else frappe.datetime.get_today() }}</span>
+				</div>
+				{% if doc.posting_time %}
+				<div class="meta-line">
+					<span class="meta-label">Time:</span>
+					<span class="meta-value">{{ doc.posting_time }}</span>
+				</div>
+				{% endif %}
+				<div class="meta-line">
+					<span class="meta-label">Total Qty:</span>
+					<span class="meta-value">{{ doc.total_qty or (doc.items | sum(attribute='qty')) }}</span>
+				</div>
+				{% if doc.status %}
+				<div class="meta-line" style="margin-top: 3px;">
+					<span class="meta-label">Status:</span>
+					{% set s_cls = 'status-completed' if doc.status == 'Completed' else ('status-to-bill' if doc.status == 'To Bill' else ('status-draft' if doc.status == 'Draft' else 'status-completed')) %}
+					<span class="status-badge {{ s_cls }}">{{ doc.status }}</span>
+				</div>
+				{% endif %}
+			</div>
+		</div>
+	</div>
+
+	<!-- 2. Customer & Delivery Details Cards -->
+	<div class="alam-cards-table">
+		<!-- Left: Delivery To -->
+		<div class="alam-card-cell">
+			<div class="card-heading">DELIVER TO</div>
+			<div class="customer-name">{{ doc.customer_name or doc.customer }}</div>
+			{% if doc.shipping_address %}
+				<div class="customer-address">{{ doc.shipping_address }}</div>
+			{% elif doc.address_display %}
+				<div class="customer-address">{{ doc.address_display }}</div>
+			{% elif doc.customer_address %}
+				<div class="customer-address">{{ doc.customer_address }}</div>
+			{% endif %}
+			<div class="customer-contacts">
+				{% if doc.contact_display and doc.contact_display != doc.customer_name %}
+					<div><span>Contact Person:</span> {{ doc.contact_display }}</div>
+				{% endif %}
+				{% if doc.contact_mobile or doc.contact_phone %}
+					<div><span>Phone:</span> {{ doc.contact_mobile or doc.contact_phone }}</div>
+				{% endif %}
+				{% if doc.contact_email %}
+					<div><span>Email:</span> {{ doc.contact_email }}</div>
+				{% endif %}
+				{% if doc.tax_id %}
+					<div><span>Tax/VAT No:</span> {{ doc.tax_id }}</div>
+				{% endif %}
+			</div>
+		</div>
+
+		<!-- Right: Delivery Details -->
+		<div class="alam-card-cell">
+			<div class="card-heading">DELIVERY DETAILS</div>
+			<table class="details-grid">
+				<tr>
+					<td class="dt-label">Delivery Note No.:</td>
+					<td class="dt-value"><b>{{ doc.name }}</b></td>
+				</tr>
+				<tr>
+					<td class="dt-label">Posting Date:</td>
+					<td class="dt-value">{{ frappe.utils.format_date(doc.posting_date, "dd-MM-yyyy") if doc.posting_date else "" }}</td>
+				</tr>
+				{% set so_ref = doc.items[0].against_sales_order if (doc.items and doc.items[0].against_sales_order) else "" %}
+				{% if so_ref %}
+				<tr>
+					<td class="dt-label">Sales Order:</td>
+					<td class="dt-value">{{ so_ref }}</td>
+				</tr>
+				{% endif %}
+				{% if doc.po_no %}
+				<tr>
+					<td class="dt-label">PO Number:</td>
+					<td class="dt-value">{{ doc.po_no }}{% if doc.po_date %} ({{ frappe.utils.format_date(doc.po_date, "dd-MM-yyyy") }}){% endif %}</td>
+				</tr>
+				{% endif %}
+				{% if doc.set_warehouse %}
+				<tr>
+					<td class="dt-label">Source Warehouse:</td>
+					<td class="dt-value">{{ doc.set_warehouse }}</td>
+				</tr>
+				{% endif %}
+				{% if doc.driver_name or doc.driver %}
+				<tr>
+					<td class="dt-label">Driver:</td>
+					<td class="dt-value">{{ doc.driver_name or doc.driver }}</td>
+				</tr>
+				{% endif %}
+				{% if doc.vehicle_no %}
+				<tr>
+					<td class="dt-label">Vehicle No.:</td>
+					<td class="dt-value">{{ doc.vehicle_no }}</td>
+				</tr>
+				{% endif %}
+				{% if doc.transporter_name %}
+				<tr>
+					<td class="dt-label">Transporter:</td>
+					<td class="dt-value">{{ doc.transporter_name }}</td>
+				</tr>
+				{% endif %}
+				{% if doc.is_return and doc.return_against %}
+				<tr>
+					<td class="dt-label">Return Against:</td>
+					<td class="dt-value">{{ doc.return_against }}</td>
+				</tr>
+				{% endif %}
+			</table>
+		</div>
+	</div>
+
+	<!-- 3. Items Table -->
+	<table class="items-table">
+		<thead>
+			<tr>
+				<th style="width: 4%; text-align: center;">#</th>
+				<th style="width: 38%; text-align: left;">Item Description</th>
+				<th style="width: 14%; text-align: left;">Item Code</th>
+				<th style="width: 14%; text-align: left;">Warehouse</th>
+				<th style="width: 8%; text-align: center;">Qty</th>
+				<th style="width: 8%; text-align: center;">UOM</th>
+				{% if not doc.print_without_amount %}
+				<th style="width: 14%; text-align: right;">Amount</th>
+				{% endif %}
+			</tr>
+		</thead>
+		<tbody>
+			{% for item in doc.items %}
+			<tr>
+				<td class="text-center text-muted">{{ loop.index }}</td>
+				<td class="text-left">
+					<div class="item-name">{{ item.item_name or item.item_code }}</div>
+					{% if item.description and item.description != item.item_name and (item.description | striptags | trim) != (item.item_name | trim) %}
+						<div class="item-desc">{{ item.description }}</div>
+					{% endif %}
+				</td>
+				<td class="item-code text-left">{{ item.item_code }}</td>
+				<td class="text-left" style="font-size: 8px; color: #475569;">{{ item.warehouse or doc.set_warehouse or "" }}</td>
+				<td class="text-center font-semibold">{{ item.get_formatted('qty', doc) or item.qty }}</td>
+				<td class="text-center text-muted">{{ item.uom or "" }}</td>
+				{% if not doc.print_without_amount %}
+				<td class="text-right item-amount">{{ item.get_formatted('amount', doc) }}</td>
+				{% endif %}
+			</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+
+	<!-- 4. Bottom Section -->
+	<div class="bottom-container">
+		<div class="bottom-left-cell">
+			<!-- Special Instructions / Remarks -->
+			{% if doc.instructions %}
+			<div class="sub-card">
+				<div class="sub-card-title">Instructions</div>
+				<div style="font-size: 8.5px; color: #475569;">{{ doc.instructions }}</div>
+			</div>
+			{% endif %}
+
+			{% if doc.remarks and doc.remarks.strip() and doc.remarks.strip() != "No Remarks" %}
+			<div class="sub-card">
+				<div class="sub-card-title">Notes / Remarks</div>
+				<div style="font-size: 8.5px; color: #475569;">{{ doc.remarks }}</div>
+			</div>
+			{% endif %}
+
+			<div class="sub-card">
+				<div class="sub-card-title">Receipt Confirmation</div>
+				<div style="font-size: 8px; color: #64748b; line-height: 1.35;">
+					Received the above mentioned goods in good condition and order. Any damage or discrepancy must be reported within 24 hours of delivery.
+				</div>
+			</div>
+		</div>
+
+		<div class="bottom-right-cell">
+			<table class="totals-table">
+				<tr>
+					<td class="tot-label">Total Quantity</td>
+					<td class="tot-val">{{ doc.total_qty or (doc.items | sum(attribute='qty')) }}</td>
+				</tr>
+				{% if not doc.print_without_amount %}
+				<tr>
+					<td class="tot-label">Subtotal</td>
+					<td class="tot-val">{{ doc.get_formatted('net_total', doc) if doc.net_total else doc.get_formatted('total', doc) }}</td>
+				</tr>
+				{% if doc.discount_amount and doc.discount_amount > 0 %}
+				<tr>
+					<td class="tot-label">Discount</td>
+					<td class="tot-val" style="color: #b91c1c;">-{{ doc.get_formatted('discount_amount', doc) }}</td>
+				</tr>
+				{% endif %}
+				{% if doc.taxes %}
+					{% for tax in doc.taxes %}
+						{% if tax.tax_amount and tax.tax_amount != 0 %}
+						<tr>
+							<td class="tot-label">{{ tax.description or tax.account_head }}</td>
+							<td class="tot-val">{{ tax.get_formatted('tax_amount', doc) }}</td>
+						</tr>
+						{% endif %}
+					{% endfor %}
+				{% endif %}
+				<tr class="grand-total-row">
+					<td class="grand-total-label">TOTAL AMOUNT</td>
+					<td class="grand-total-val">{{ doc.get_formatted('grand_total', doc) }}</td>
+				</tr>
+				{% endif %}
+			</table>
+		</div>
+	</div>
+
+	<!-- 5. Terms & Conditions (if available) -->
+	{% if doc.terms %}
+	<div class="sub-card" style="margin-bottom: 10px;">
+		<div class="sub-card-title">Terms & Conditions</div>
+		<div style="font-size: 8px; color: #475569;">{{ doc.terms }}</div>
+	</div>
+	{% endif %}
+
+	<!-- 6. Signature Area -->
+	<div class="signatures-table">
+		<div class="signature-cell">
+			<div class="sign-line"></div>
+			<div class="sign-label">Prepared By</div>
+		</div>
+		<div class="signature-cell">
+			<div class="sign-line"></div>
+			<div class="sign-label">Delivered By (Driver)</div>
+		</div>
+		<div class="signature-cell">
+			<div class="sign-line"></div>
+			<div class="sign-label">Received By (Customer)</div>
+		</div>
+	</div>
+
+	<!-- 7. Minimal Footer -->
+	<div class="invoice-footer">
+		<div class="footer-company">{{ company_name }}</div>
+		<div class="footer-thanks">Thank you for your business.</div>
+		<div class="footer-details">
+			{% if company_doc and company_doc.phone_no %}{{ company_doc.phone_no }}{% endif %}
+			{% if company_doc and company_doc.email %} &bull; {{ company_doc.email }}{% endif %}
+			{% if doc.company_address_display %}
+				&bull; {{ doc.company_address_display | striptags | replace('\n', ', ') }}
+			{% elif company_doc and company_doc.country %}
+				&bull; {{ company_doc.country }}
+			{% endif %}
+		</div>
+	</div>
+</div>

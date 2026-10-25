@@ -1,0 +1,52 @@
+{
+  "doctype": "DocType",
+  "name": "WOB Zone Driver",
+  "module": "Delivery Management",
+  "engine": "InnoDB",
+  "istable": 1,
+  "editable_grid": 1,
+  "track_changes": 0,
+  "fields": [
+    {
+      "fieldname": "driver",
+      "label": "Driver ID",
+      "fieldtype": "Link",
+      "options": "Driver",
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "driver_name",
+      "label": "Driver Name",
+      "fieldtype": "Data",
+      "in_list_view": 1,
+      "read_only": 1
+    },
+    {
+      "fieldname": "driver_user",
+      "label": "Driver User",
+      "fieldtype": "Link",
+      "options": "User",
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "assignment_type",
+      "label": "Assignment Type",
+      "fieldtype": "Data",
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "availability_status",
+      "label": "Availability Status",
+      "fieldtype": "Data",
+      "in_list_view": 1
+    }
+  ],
+  "field_order": [
+    "driver",
+    "driver_name",
+    "driver_user",
+    "assignment_type",
+    "availability_status"
+  ],
+  "permissions": []
+}

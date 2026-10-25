@@ -1,0 +1,22 @@
+{
+  "doctype": "Page",
+  "name": "wob-delivery-dashboard",
+  "page_name": "wob-delivery-dashboard",
+  "title": "Delivery Dashboard",
+  "module": "Delivery Management",
+  "standard": "Yes",
+  "roles": [
+    {
+      "role": "System Manager"
+    },
+    {
+      "role": "WOB Delivery Administrator"
+    },
+    {
+      "role": "WOB Delivery Manager"
+    },
+    {
+      "role": "WOB Delivery Dispatcher"
+    }
+  ]
+}

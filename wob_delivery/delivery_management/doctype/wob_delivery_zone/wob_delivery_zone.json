@@ -1,0 +1,240 @@
+{
+  "doctype": "DocType",
+  "name": "WOB Delivery Zone",
+  "module": "Delivery Management",
+  "engine": "InnoDB",
+  "istable": 0,
+  "editable_grid": 1,
+  "track_changes": 1,
+  "autoname": "format:ZONE-{#####}",
+  "title_field": "zone_name",
+  "search_fields": "zone_name,zone_code,company",
+  "fields": [
+    {
+      "fieldname": "general_section",
+      "label": "General Information",
+      "fieldtype": "Section Break",
+      "icon": "map-pin"
+    },
+    {
+      "fieldname": "zone_name",
+      "label": "Zone Name",
+      "fieldtype": "Data",
+      "reqd": 1,
+      "in_list_view": 1,
+      "in_standard_filter": 1
+    },
+    {
+      "fieldname": "zone_code",
+      "label": "Zone Code",
+      "fieldtype": "Data",
+      "reqd": 1,
+      "in_list_view": 1,
+      "description": "Unique uppercase alphanumeric code (e.g. LUSAIL, ALSHAD, DOHA-01)"
+    },
+    {
+      "fieldname": "company",
+      "label": "Company",
+      "fieldtype": "Link",
+      "options": "Company",
+      "reqd": 1,
+      "in_list_view": 1,
+      "in_standard_filter": 1
+    },
+    {
+      "fieldname": "col_break_general",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "active",
+      "label": "Active",
+      "fieldtype": "Check",
+      "default": "1",
+      "in_list_view": 1,
+      "in_standard_filter": 1
+    },
+    {
+      "fieldname": "zone_key",
+      "label": "Zone Key",
+      "fieldtype": "Data",
+      "unique": 1,
+      "hidden": 1,
+      "read_only": 1
+    },
+    {
+      "fieldname": "coverage_section",
+      "label": "Coverage Areas",
+      "fieldtype": "Section Break",
+      "icon": "map"
+    },
+    {
+      "fieldname": "coverage_areas",
+      "label": "Coverage Areas",
+      "fieldtype": "Table",
+      "options": "WOB Delivery Zone Area",
+      "description": "Sub-areas, neighborhoods, or sectors covered under this delivery zone"
+    },
+    {
+      "fieldname": "drivers_section",
+      "label": "Assigned Drivers",
+      "fieldtype": "Section Break",
+      "icon": "truck"
+    },
+    {
+      "fieldname": "assigned_drivers",
+      "label": "Assigned Drivers",
+      "fieldtype": "Table",
+      "options": "WOB Zone Driver",
+      "read_only": 1,
+      "description": "Active driver mappings for this company and zone (managed in Driver Zone Assignment)"
+    },
+    {
+      "fieldname": "delivery_settings_section",
+      "label": "Delivery Settings",
+      "fieldtype": "Section Break",
+      "icon": "settings"
+    },
+    {
+      "fieldname": "delivery_charge",
+      "label": "Default Delivery Charge",
+      "fieldtype": "Currency",
+      "options": "currency",
+      "description": "Base delivery fee for this zone"
+    },
+    {
+      "fieldname": "currency",
+      "label": "Currency",
+      "fieldtype": "Link",
+      "options": "Currency",
+      "read_only": 1
+    },
+    {
+      "fieldname": "estimated_delivery_time",
+      "label": "Estimated Delivery Time (mins)",
+      "fieldtype": "Int",
+      "description": "Estimated turnaround time in minutes"
+    },
+    {
+      "fieldname": "maximum_active_deliveries",
+      "label": "Maximum Active Deliveries",
+      "fieldtype": "Int",
+      "description": "Optional maximum concurrent active deliveries allowed in this zone"
+    },
+    {
+      "fieldname": "col_break_settings",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "allow_cash_on_delivery",
+      "label": "Allow Cash on Delivery",
+      "fieldtype": "Check",
+      "default": "1"
+    },
+    {
+      "fieldname": "delivery_operating_days",
+      "label": "Operating Days",
+      "fieldtype": "Data",
+      "description": "e.g. All Days, Saturday - Thursday"
+    },
+    {
+      "fieldname": "delivery_start_time",
+      "label": "Delivery Start Time",
+      "fieldtype": "Time"
+    },
+    {
+      "fieldname": "delivery_end_time",
+      "label": "Delivery End Time",
+      "fieldtype": "Time"
+    },
+    {
+      "fieldname": "additional_info_section",
+      "label": "Additional Information",
+      "fieldtype": "Section Break",
+      "icon": "file-text",
+      "collapsible": 1
+    },
+    {
+      "fieldname": "description",
+      "label": "Zone Description / Boundaries",
+      "fieldtype": "Small Text"
+    },
+    {
+      "fieldname": "col_break_additional",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "remarks",
+      "label": "Internal Remarks",
+      "fieldtype": "Small Text"
+    }
+  ],
+  "field_order": [
+    "general_section",
+    "zone_name",
+    "zone_code",
+    "company",
+    "col_break_general",
+    "active",
+    "zone_key",
+    "coverage_section",
+    "coverage_areas",
+    "drivers_section",
+    "assigned_drivers",
+    "delivery_settings_section",
+    "delivery_charge",
+    "currency",
+    "estimated_delivery_time",
+    "maximum_active_deliveries",
+    "col_break_settings",
+    "allow_cash_on_delivery",
+    "delivery_operating_days",
+    "delivery_start_time",
+    "delivery_end_time",
+    "additional_info_section",
+    "description",
+    "col_break_additional",
+    "remarks"
+  ],
+  "permissions": [
+    {
+      "role": "System Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "report": 1,
+      "export": 1,
+      "print": 1
+    },
+    {
+      "role": "WOB Delivery Administrator",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "report": 1,
+      "export": 1,
+      "print": 1
+    },
+    {
+      "role": "WOB Delivery Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "report": 1,
+      "export": 1,
+      "print": 1
+    },
+    {
+      "role": "WOB Delivery Dispatcher",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "report": 1,
+      "export": 1,
+      "print": 1
+    }
+  ]
+}

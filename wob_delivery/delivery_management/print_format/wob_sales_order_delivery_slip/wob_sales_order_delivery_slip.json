@@ -1,0 +1,17 @@
+{
+ "align_labels_right": 0,
+ "custom_format": 0,
+ "default_print_language": "en",
+ "disabled": 0,
+ "doc_type": "Sales Order",
+ "docstatus": 0,
+ "doctype": "Print Format",
+ "font": "Default",
+ "line_breaks": 0,
+ "module": "Delivery Management",
+ "name": "WOB Sales Order Delivery Slip",
+ "print_format_builder": 0,
+ "print_format_type": "Jinja",
+ "show_section_headings": 0,
+ "standard": "Yes"
+}

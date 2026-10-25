@@ -1,0 +1,357 @@
+{%- from "templates/print_formats/standard_macros.html" import add_header -%}
+<style>
+.wob-print-slip {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+	color: #1f2937;
+	font-size: 13px;
+	line-height: 1.5;
+}
+.wob-header-block {
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-start;
+	border-bottom: 2px solid #e5e7eb;
+	padding-bottom: 12px;
+	margin-bottom: 16px;
+}
+.wob-title {
+	font-size: 22px;
+	font-weight: 700;
+	color: #111827;
+	margin: 0;
+	text-transform: uppercase;
+	letter-spacing: 0.5px;
+}
+.wob-subtitle {
+	font-size: 14px;
+	font-weight: 600;
+	color: #4b5563;
+	margin-top: 2px;
+}
+.wob-status-badge {
+	display: inline-block;
+	padding: 4px 10px;
+	font-size: 12px;
+	font-weight: 600;
+	border-radius: 9999px;
+	background-color: #f3f4f6;
+	color: #374151;
+	border: 1px solid #d1d5db;
+}
+.wob-meta-grid {
+	display: flex;
+	gap: 16px;
+	margin-bottom: 18px;
+}
+.wob-meta-card {
+	flex: 1;
+	background-color: #f9fafb;
+	border: 1px solid #e5e7eb;
+	border-radius: 6px;
+	padding: 10px 14px;
+}
+.wob-meta-card h4 {
+	font-size: 12px;
+	font-weight: 700;
+	text-transform: uppercase;
+	color: #6b7280;
+	margin: 0 0 8px 0;
+	letter-spacing: 0.5px;
+	border-bottom: 1px solid #e5e7eb;
+	padding-bottom: 4px;
+}
+.wob-meta-row {
+	display: flex;
+	margin-bottom: 4px;
+	font-size: 12px;
+}
+.wob-meta-label {
+	width: 100px;
+	color: #6b7280;
+	flex-shrink: 0;
+}
+.wob-meta-val {
+	font-weight: 600;
+	color: #111827;
+	word-break: break-word;
+}
+.wob-table {
+	width: 100%;
+	border-collapse: collapse;
+	margin-top: 12px;
+	margin-bottom: 16px;
+}
+.wob-table th {
+	background-color: #f3f4f6;
+	color: #374151;
+	font-weight: 600;
+	font-size: 12px;
+	text-transform: uppercase;
+	padding: 8px 10px;
+	border: 1px solid #e5e7eb;
+	text-align: left;
+}
+.wob-table td {
+	padding: 8px 10px;
+	border: 1px solid #e5e7eb;
+	font-size: 12px;
+	vertical-align: top;
+}
+.wob-table tr:nth-child(even) {
+	background-color: #fafafa;
+}
+.text-right {
+	text-align: right;
+}
+.text-center {
+	text-align: center;
+}
+.wob-summary-block {
+	display: flex;
+	justify-content: space-between;
+	margin-top: 10px;
+	margin-bottom: 24px;
+}
+.wob-instructions {
+	flex: 1;
+	max-width: 55%;
+	padding: 10px;
+	background: #fffbeb;
+	border: 1px solid #fef3c7;
+	border-radius: 6px;
+	font-size: 12px;
+}
+.wob-totals-table {
+	width: 40%;
+	border-collapse: collapse;
+}
+.wob-totals-table td {
+	padding: 6px 10px;
+	border-bottom: 1px solid #f3f4f6;
+	font-size: 13px;
+}
+.wob-totals-table tr.wob-total-highlight td {
+	font-weight: 700;
+	font-size: 14px;
+	border-top: 2px solid #111827;
+	border-bottom: 2px solid #111827;
+	background-color: #f9fafb;
+}
+.wob-sign-block {
+	display: flex;
+	gap: 24px;
+	margin-top: 32px;
+	page-break-inside: avoid;
+}
+.wob-sign-card {
+	flex: 1;
+	border: 1px solid #d1d5db;
+	border-radius: 6px;
+	padding: 12px 16px;
+	height: 110px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+.wob-sign-title {
+	font-size: 11px;
+	font-weight: 700;
+	color: #4b5563;
+	text-transform: uppercase;
+}
+.wob-sign-line {
+	border-top: 1px dashed #9ca3af;
+	display: flex;
+	justify-content: space-between;
+	font-size: 11px;
+	color: #6b7280;
+	padding-top: 4px;
+}
+</style>
+
+<div class="wob-print-slip">
+	{% if letter_head and not no_letterhead %}
+	<div class="letter-head" style="margin-bottom: 16px;">{{ letter_head }}</div>
+	{% endif %}
+
+	<div class="wob-header-block">
+		<div>
+			<h1 class="wob-title">{{ _("Delivery Order Slip") }}</h1>
+			<div class="wob-subtitle">{{ doc.name }}</div>
+			{% if doc.company %}<div style="color: #6b7280; font-size: 12px; margin-top: 2px;">{{ doc.company }}</div>{% endif %}
+		</div>
+		<div style="text-align: right;">
+			<div class="wob-status-badge">{{ _(doc.delivery_status or "Pending") }}</div>
+			<div style="font-size: 12px; color: #6b7280; margin-top: 6px;">
+				<b>{{ _("Date") }}:</b> {{ frappe.utils.format_date(doc.scheduled_delivery_date or doc.creation) }}
+			</div>
+		</div>
+	</div>
+
+	<div class="wob-meta-grid">
+		<!-- Delivery Destination -->
+		<div class="wob-meta-card">
+			<h4>{{ _("Customer & Destination") }}</h4>
+			<div class="wob-meta-row">
+				<span class="wob-meta-label">{{ _("Customer") }}:</span>
+				<span class="wob-meta-val">{{ doc.customer or "-" }}</span>
+			</div>
+			<div class="wob-meta-row">
+				<span class="wob-meta-label">{{ _("Contact No") }}:</span>
+				<span class="wob-meta-val">{{ doc.customer_phone_number or "-" }}</span>
+			</div>
+			<div class="wob-meta-row">
+				<span class="wob-meta-label">{{ _("Address") }}:</span>
+				<span class="wob-meta-val">{{ doc.customer_delivery_address or "-" }}</span>
+			</div>
+		</div>
+
+		<!-- Dispatch Details -->
+		<div class="wob-meta-card">
+			<h4>{{ _("Dispatch & Driver") }}</h4>
+			<div class="wob-meta-row">
+				<span class="wob-meta-label">{{ _("Driver") }}:</span>
+				<span class="wob-meta-val">{{ doc.assigned_driver or _("Not Assigned") }}</span>
+			</div>
+			<div class="wob-meta-row">
+				<span class="wob-meta-label">{{ _("Delivery Zone") }}:</span>
+				<span class="wob-meta-val">{{ doc.delivery_zone or "-" }}</span>
+			</div>
+			<div class="wob-meta-row">
+				<span class="wob-meta-label">{{ _("Order Source") }}:</span>
+				<span class="wob-meta-val">{{ doc.order_source or "-" }}</span>
+			</div>
+		</div>
+
+		<!-- Billing & Reference -->
+		<div class="wob-meta-card">
+			<h4>{{ _("Settlement & Source") }}</h4>
+			<div class="wob-meta-row">
+				<span class="wob-meta-label">{{ _("Payment") }}:</span>
+				<span class="wob-meta-val">{{ doc.payment_type or "-" }}</span>
+			</div>
+			<div class="wob-meta-row">
+				<span class="wob-meta-label">{{ _("To Collect") }}:</span>
+				<span class="wob-meta-val" style="color: #b91c1c;">
+					{{ doc.currency or "" }} {{ frappe.utils.fmt_money(doc.amount_to_collect or 0) }}
+				</span>
+			</div>
+			<div class="wob-meta-row">
+				<span class="wob-meta-label">{{ _("Sales Order") }}:</span>
+				<span class="wob-meta-val">{{ doc.sales_order or "-" }}</span>
+			</div>
+			{% if doc.delivery_note %}
+			<div class="wob-meta-row">
+				<span class="wob-meta-label">{{ _("Delivery Note") }}:</span>
+				<span class="wob-meta-val">{{ doc.delivery_note }}</span>
+			</div>
+			{% endif %}
+			{% if doc.sales_invoice %}
+			<div class="wob-meta-row">
+				<span class="wob-meta-label">{{ _("Sales Invoice") }}:</span>
+				<span class="wob-meta-val">{{ doc.sales_invoice }}</span>
+			</div>
+			{% endif %}
+		</div>
+	</div>
+
+	<!-- Items Table -->
+	{% set items = [] %}
+	{% if doc.delivery_note %}
+		{% set items = frappe.get_all("Delivery Note Item", filters={"parent": doc.delivery_note}, fields=["item_code", "item_name", "description", "qty", "uom", "rate", "amount"], order_by="idx asc") %}
+	{% elif doc.sales_order %}
+		{% set items = frappe.get_all("Sales Order Item", filters={"parent": doc.sales_order}, fields=["item_code", "item_name", "description", "qty", "uom", "rate", "amount"], order_by="idx asc") %}
+	{% elif doc.sales_invoice %}
+		{% set items = frappe.get_all("Sales Invoice Item", filters={"parent": doc.sales_invoice}, fields=["item_code", "item_name", "description", "qty", "uom", "rate", "amount"], order_by="idx asc") %}
+	{% endif %}
+
+	<table class="wob-table">
+		<thead>
+			<tr>
+				<th class="text-center" style="width: 5%;">#</th>
+				<th style="width: 25%;">{{ _("Item Code") }}</th>
+				<th style="width: 35%;">{{ _("Item Name & Description") }}</th>
+				<th class="text-right" style="width: 12%;">{{ _("Qty") }}</th>
+				<th class="text-right" style="width: 11%;">{{ _("Rate") }}</th>
+				<th class="text-right" style="width: 12%;">{{ _("Amount") }}</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% set total_qty = [0] %}
+			{% set total_amt = [0] %}
+			{% for row in items %}
+				{% if total_qty.append(total_qty.pop() + (row.qty or 0)) %}{% endif %}
+				{% if total_amt.append(total_amt.pop() + (row.amount or 0)) %}{% endif %}
+				<tr>
+					<td class="text-center">{{ loop.index }}</td>
+					<td><b>{{ row.item_code }}</b></td>
+					<td>
+						<div>{{ row.item_name or row.item_code }}</div>
+						{% if row.description and row.description != row.item_name %}
+							<div style="font-size: 11px; color: #6b7280;">{{ row.description | striptags }}</div>
+						{% endif %}
+					</td>
+					<td class="text-right"><b>{{ row.qty }}</b> <span style="font-size: 11px; color: #6b7280;">{{ row.uom or "" }}</span></td>
+					<td class="text-right">{{ frappe.utils.fmt_money(row.rate or 0) }}</td>
+					<td class="text-right">{{ frappe.utils.fmt_money(row.amount or 0) }}</td>
+				</tr>
+			{% else %}
+				<tr>
+					<td colspan="6" class="text-center" style="padding: 16px; color: #6b7280;">
+						{{ _("No items found on linked sales documents.") }}
+					</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+
+	<!-- Summary & Notes -->
+	<div class="wob-summary-block">
+		<div class="wob-instructions">
+			<b>{{ _("Delivery Instructions / Notes") }}:</b><br>
+			{{ doc.delivery_instructions or _("Handle with care. Confirm payment if Cash on Delivery.") }}
+		</div>
+
+		<table class="wob-totals-table">
+			<tr>
+				<td class="wob-meta-label">{{ _("Total Items / Qty") }}:</td>
+				<td class="text-right"><b>{{ items|length }} {{ _("items") }} ({{ total_qty[0] }} {{ _("qty") }})</b></td>
+			</tr>
+			{% if total_amt[0] %}
+			<tr>
+				<td class="wob-meta-label">{{ _("Order Total") }}:</td>
+				<td class="text-right"><b>{{ doc.currency or "" }} {{ frappe.utils.fmt_money(total_amt[0]) }}</b></td>
+			</tr>
+			{% endif %}
+			<tr class="wob-total-highlight">
+				<td>{{ _("Amount to Collect") }}:</td>
+				<td class="text-right" style="color: #b91c1c;">
+					{{ doc.currency or "" }} {{ frappe.utils.fmt_money(doc.amount_to_collect or 0) }}
+				</td>
+			</tr>
+		</table>
+	</div>
+
+	<!-- Signatures -->
+	<div class="wob-sign-block">
+		<div class="wob-sign-card">
+			<div class="wob-sign-title">{{ _("Dispatched By / Driver") }}</div>
+			<div style="font-size: 12px; color: #374151;">{{ doc.assigned_driver or "" }}</div>
+			<div class="wob-sign-line">
+				<span>{{ _("Signature") }}</span>
+				<span>{{ _("Date & Time") }}</span>
+			</div>
+		</div>
+
+		<div class="wob-sign-card">
+			<div class="wob-sign-title">{{ _("Customer Acknowledgement") }}</div>
+			<div style="font-size: 11px; color: #4b5563;">
+				{{ _("Received the above items in satisfactory condition.") }}
+			</div>
+			<div class="wob-sign-line">
+				<span>{{ _("Customer Signature") }}</span>
+				<span>{{ _("Date & Time") }}</span>
+			</div>
+		</div>
+	</div>
+</div>

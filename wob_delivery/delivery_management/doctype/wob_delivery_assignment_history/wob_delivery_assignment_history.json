@@ -1,0 +1,119 @@
+{
+  "doctype": "DocType",
+  "name": "WOB Delivery Assignment History",
+  "module": "Delivery Management",
+  "engine": "InnoDB",
+  "istable": 0,
+  "editable_grid": 1,
+  "track_changes": 1,
+  "fields": [
+    {
+      "fieldname": "delivery_order",
+      "label": "Delivery Order",
+      "fieldtype": "Link",
+      "options": "WOB Delivery Order",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "company",
+      "label": "Company",
+      "fieldtype": "Link",
+      "options": "Company",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "previous_driver",
+      "label": "Previous Driver",
+      "fieldtype": "Link",
+      "options": "Driver"
+    },
+    {
+      "fieldname": "new_driver",
+      "label": "New Driver",
+      "fieldtype": "Link",
+      "options": "Driver",
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "previous_status",
+      "label": "Previous Status",
+      "fieldtype": "Data"
+    },
+    {
+      "fieldname": "new_status",
+      "label": "New Status",
+      "fieldtype": "Data"
+    },
+    {
+      "fieldname": "reason",
+      "label": "Reason",
+      "fieldtype": "Small Text",
+      "reqd": 1
+    },
+    {
+      "fieldname": "changed_by",
+      "label": "Changed By",
+      "fieldtype": "Link",
+      "options": "User",
+      "reqd": 1
+    },
+    {
+      "fieldname": "changed_at",
+      "label": "Changed At",
+      "fieldtype": "Datetime",
+      "reqd": 1
+    }
+  ],
+  "field_order": [
+    "delivery_order",
+    "company",
+    "previous_driver",
+    "new_driver",
+    "previous_status",
+    "new_status",
+    "reason",
+    "changed_by",
+    "changed_at"
+  ],
+  "permissions": [
+    {
+      "role": "System Manager",
+      "read": 1,
+      "write": 0,
+      "create": 0,
+      "report": 1,
+      "export": 1,
+      "print": 1
+    },
+    {
+      "role": "WOB Delivery Administrator",
+      "read": 1,
+      "write": 0,
+      "create": 0,
+      "report": 1,
+      "export": 1,
+      "print": 1
+    },
+    {
+      "role": "WOB Delivery Manager",
+      "read": 1,
+      "write": 0,
+      "create": 0,
+      "report": 1,
+      "export": 1,
+      "print": 1
+    },
+    {
+      "role": "WOB Delivery Dispatcher",
+      "read": 1,
+      "write": 0,
+      "create": 0,
+      "report": 1,
+      "export": 1,
+      "print": 1
+    }
+  ],
+  "autoname": "format:DAH-{#####}"
+}

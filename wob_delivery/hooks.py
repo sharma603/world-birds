@@ -11,15 +11,15 @@ app_license = "mit"
 # required_apps = []
 
 # Each item in the list will be shown as an app in the apps page
-# add_to_apps_screen = [
-# 	{
-# 		"name": "wob_delivery",
-# 		"logo": "/assets/wob_delivery/logo.png",
-# 		"title": "WOB Delivery",
-# 		"route": "/wob_delivery",
-# 		"has_permission": "wob_delivery.api.permission.has_app_permission",
-# 	}
-# ]
+add_to_apps_screen = [
+	{
+		"name": "wob_delivery",
+		"logo": "/assets/wob_delivery/images/wob_delivery-logo.svg",
+		"title": "WOB Delivery",
+		"route": "/desk/wob-delivery-dashboard",
+		"sequence_id": 3,
+	}
+]
 
 # The dock, the rail down the left of the desk, is a document rather than a hook. Author it in
 # Manage Dock on a developer-mode site and press Export to App, and it is written to
@@ -277,3 +277,30 @@ app_license = "mit"
 # List of apps whose translatable strings should be excluded from this app's translations.
 # ignore_translatable_strings_from = []
 
+
+# Phase 1: native ERPNext delivery tasks, without stock/payment posting.
+required_apps = ["erpnext"]
+doctype_js = {"Sales Order": "public/js/sales_order.js"}
+app_include_css = ["/assets/wob_delivery/css/wob_delivery_order.css"]
+after_install = "wob_delivery.setup.after_install"
+after_migrate = "wob_delivery.setup.after_migrate"
+permission_query_conditions = {
+ "WOB Delivery Order": "wob_delivery.permissions.order_query",
+ "WOB Delivery Zone": "wob_delivery.permissions.zone_query",
+ "WOB Driver Zone Assignment": "wob_delivery.permissions.assignment_query",
+ "WOB Delivery Assignment History": "wob_delivery.permissions.history_query",
+}
+has_permission = {
+ "WOB Delivery Order": "wob_delivery.permissions.order_permission",
+ "WOB Delivery Zone": "wob_delivery.permissions.staff_permission",
+ "WOB Driver Zone Assignment": "wob_delivery.permissions.staff_permission",
+ "WOB Delivery Assignment History": "wob_delivery.permissions.staff_permission",
+}
+
+# Only linked collection receipts emit delivery invalidations; no financial payloads.
+doc_events = {
+ "Payment Entry": {
+  "on_submit": "wob_delivery.live.payment_changed",
+  "on_cancel": "wob_delivery.live.payment_changed",
+ }
+}

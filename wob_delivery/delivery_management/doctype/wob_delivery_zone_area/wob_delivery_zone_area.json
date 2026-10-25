@@ -1,0 +1,48 @@
+{
+  "actions": [],
+  "allow_rename": 0,
+  "creation": "2026-10-21 15:45:00.000000",
+  "doctype": "DocType",
+  "editable_grid": 1,
+  "engine": "InnoDB",
+  "field_order": [
+    "area_name",
+    "area_code",
+    "active",
+    "description"
+  ],
+  "fields": [
+    {
+      "fieldname": "area_name",
+      "fieldtype": "Data",
+      "in_list_view": 1,
+      "label": "Area Name",
+      "reqd": 1
+    },
+    {
+      "fieldname": "area_code",
+      "fieldtype": "Data",
+      "in_list_view": 1,
+      "label": "Area Code"
+    },
+    {
+      "default": "1",
+      "fieldname": "active",
+      "fieldtype": "Check",
+      "in_list_view": 1,
+      "label": "Active"
+    },
+    {
+      "fieldname": "description",
+      "fieldtype": "Small Text",
+      "label": "Description"
+    }
+  ],
+  "istable": 1,
+  "module": "Delivery Management",
+  "name": "WOB Delivery Zone Area",
+  "permissions": [],
+  "sort_field": "creation",
+  "sort_order": "ASC",
+  "track_changes": 0
+}

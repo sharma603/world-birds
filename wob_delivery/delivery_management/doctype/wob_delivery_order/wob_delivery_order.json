@@ -1,0 +1,369 @@
+{
+  "doctype": "DocType",
+  "name": "WOB Delivery Order",
+  "module": "Delivery Management",
+  "engine": "InnoDB",
+  "istable": 0,
+  "editable_grid": 1,
+  "track_changes": 1,
+  "autoname": "format:WOB-DEL-{YYYY}-{#####}",
+  "title_field": "customer",
+  "search_fields": "customer,assigned_driver,delivery_zone,sales_order,sales_invoice,delivery_note",
+  "sort_field": "scheduled_delivery_date",
+  "sort_order": "ASC",
+  "fields": [
+    {
+      "fieldname": "order_details_section",
+      "label": "Order & Source Documents",
+      "fieldtype": "Section Break",
+      "icon": "file-text"
+    },
+    {
+      "fieldname": "company",
+      "label": "Company",
+      "fieldtype": "Link",
+      "options": "Company",
+      "reqd": 1,
+      "in_list_view": 1,
+      "in_standard_filter": 1
+    },
+    {
+      "fieldname": "order_source",
+      "label": "Order Source",
+      "fieldtype": "Select",
+      "options": "Phone\nWhatsApp\nOnline\nOther",
+      "default": "Phone",
+      "reqd": 1,
+      "in_standard_filter": 1
+    },
+    {
+      "fieldname": "scheduled_delivery_date",
+      "label": "Scheduled Delivery Date",
+      "fieldtype": "Date",
+      "reqd": 1,
+      "in_list_view": 1,
+      "in_standard_filter": 1
+    },
+    {
+      "fieldname": "scheduled_delivery_time",
+      "label": "Scheduled Delivery Time",
+      "fieldtype": "Time",
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "delivery_status",
+      "label": "Delivery Status",
+      "fieldtype": "Select",
+      "options": "Pending\nReady for Dispatch\nAssigned\nOut for Delivery\nDelivered\nFailed\nRescheduled\nCancelled",
+      "default": "Pending",
+      "reqd": 1,
+      "in_list_view": 1,
+      "in_standard_filter": 1
+    },
+    {
+      "fieldname": "col_break_source_docs",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "sales_order",
+      "label": "Sales Order",
+      "fieldtype": "Link",
+      "options": "Sales Order"
+    },
+    {
+      "fieldname": "delivery_note",
+      "label": "Delivery Note",
+      "fieldtype": "Link",
+      "options": "Delivery Note"
+    },
+    {
+      "fieldname": "sales_invoice",
+      "label": "Sales Invoice",
+      "fieldtype": "Link",
+      "options": "Sales Invoice"
+    },
+    {
+      "fieldname": "customer_section",
+      "label": "Customer & Delivery Address",
+      "fieldtype": "Section Break",
+      "icon": "map-pin"
+    },
+    {
+      "fieldname": "customer",
+      "label": "Customer",
+      "fieldtype": "Link",
+      "options": "Customer",
+      "read_only": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "customer_phone_number",
+      "label": "Customer Phone Number",
+      "fieldtype": "Data",
+      "read_only": 1
+    },
+    {
+      "fieldname": "customer_address",
+      "label": "Customer Address (Master)",
+      "fieldtype": "Link",
+      "options": "Address",
+      "read_only": 1
+    },
+    {
+      "fieldname": "customer_delivery_address",
+      "label": "Customer Delivery Address",
+      "fieldtype": "Small Text",
+      "reqd": 1,
+      "description": "Full street address / landmark for delivery dispatch"
+    },
+    {
+      "fieldname": "col_break_location",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "delivery_zone",
+      "label": "Delivery Zone",
+      "fieldtype": "Link",
+      "options": "WOB Delivery Zone",
+      "reqd": 1,
+      "in_list_view": 1,
+      "in_standard_filter": 1
+    },
+    {
+      "fieldname": "latitude",
+      "label": "Latitude",
+      "fieldtype": "Float"
+    },
+    {
+      "fieldname": "longitude",
+      "label": "Longitude",
+      "fieldtype": "Float"
+    },
+    {
+      "fieldname": "delivery_instructions",
+      "label": "Delivery Instructions",
+      "fieldtype": "Small Text",
+      "description": "Gate code, call before arrival, delivery notes"
+    },
+    {
+      "fieldname": "dispatch_section",
+      "label": "Dispatch & Driver Assignment",
+      "fieldtype": "Section Break",
+      "icon": "truck"
+    },
+    {
+      "fieldname": "assigned_driver",
+      "label": "Assigned Driver",
+      "fieldtype": "Link",
+      "options": "Driver",
+      "in_list_view": 1,
+      "in_standard_filter": 1
+    },
+    {
+      "fieldname": "assigned_by",
+      "label": "Assigned By",
+      "fieldtype": "Link",
+      "options": "User",
+      "read_only": 1
+    },
+    {
+      "fieldname": "assignment_date_time",
+      "label": "Assignment Date Time",
+      "fieldtype": "Datetime",
+      "read_only": 1
+    },
+    {
+      "fieldname": "col_break_dispatch",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "change_reason",
+      "label": "Reassignment / Override Reason",
+      "fieldtype": "Small Text",
+      "description": "Mandatory when reassigning driver or overriding terminal state"
+    },
+    {
+      "fieldname": "completed_at",
+      "label": "Completed At",
+      "fieldtype": "Datetime",
+      "read_only": 1
+    },
+    {
+      "fieldname": "payment_section",
+      "label": "Payment & Collection",
+      "fieldtype": "Section Break",
+      "icon": "banknote"
+    },
+    {
+      "fieldname": "payment_type",
+      "label": "Payment Type",
+      "fieldtype": "Select",
+      "options": "Cash on Delivery\nPrepaid\nBank Transfer\nOther",
+      "default": "Cash on Delivery",
+      "reqd": 1,
+      "in_standard_filter": 1
+    },
+    {
+      "fieldname": "payment_methods_html",
+      "fieldtype": "HTML",
+      "label": "Payment Methods"
+    },
+    {
+      "fieldname": "allowed_payment_modes",
+      "fieldtype": "Small Text",
+      "label": "Allowed Payment Methods",
+      "hidden": 1,
+      "read_only": 1
+    },
+    {
+      "fieldname": "payment_mode",
+      "label": "Payment Mode",
+      "fieldtype": "Link",
+      "options": "Mode of Payment",
+      "description": "Select a payment mode configured for this company. The driver will see this selection.",
+      "hidden": 1
+    },
+    {
+      "fieldname": "collection_bank_account",
+      "label": "Receiving Account",
+      "fieldtype": "Link",
+      "options": "Account",
+      "read_only": 1,
+      "depends_on": "eval:doc.payment_mode"
+    },
+    {
+      "fieldname": "currency",
+      "label": "Currency",
+      "fieldtype": "Link",
+      "options": "Currency",
+      "read_only": 1
+    },
+    {
+      "fieldname": "col_break_payment",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "amount_to_collect",
+      "label": "Amount To Collect",
+      "fieldtype": "Currency",
+      "options": "currency",
+      "read_only": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "audit_section",
+      "label": "Audit Information",
+      "fieldtype": "Section Break",
+      "icon": "clock",
+      "collapsible": 1
+    },
+    {
+      "fieldname": "created_by",
+      "label": "Created By",
+      "fieldtype": "Link",
+      "options": "User",
+      "read_only": 1
+    },
+    {
+      "fieldname": "col_break_audit",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "active_fulfillment_key",
+      "label": "Active Fulfillment Key",
+      "fieldtype": "Data",
+      "read_only": 1,
+      "hidden": 1,
+      "unique": 1
+    }
+  ],
+  "field_order": [
+    "order_details_section",
+    "company",
+    "order_source",
+    "scheduled_delivery_date",
+    "scheduled_delivery_time",
+    "delivery_status",
+    "col_break_source_docs",
+    "sales_order",
+    "delivery_note",
+    "sales_invoice",
+    "customer_section",
+    "customer",
+    "customer_phone_number",
+    "customer_address",
+    "customer_delivery_address",
+    "col_break_location",
+    "delivery_zone",
+    "latitude",
+    "longitude",
+    "delivery_instructions",
+    "dispatch_section",
+    "assigned_driver",
+    "assigned_by",
+    "assignment_date_time",
+    "col_break_dispatch",
+    "change_reason",
+    "completed_at",
+    "payment_section",
+    "payment_type",
+    "payment_methods_html",
+    "allowed_payment_modes",
+    "payment_mode",
+    "collection_bank_account",
+    "currency",
+    "col_break_payment",
+    "amount_to_collect",
+    "audit_section",
+    "created_by",
+    "col_break_audit",
+    "active_fulfillment_key"
+  ],
+  "permissions": [
+    {
+      "role": "System Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "report": 1,
+      "export": 1,
+      "print": 1
+    },
+    {
+      "role": "WOB Delivery Administrator",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "report": 1,
+      "export": 1,
+      "print": 1
+    },
+    {
+      "role": "WOB Delivery Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "report": 1,
+      "export": 1,
+      "print": 1
+    },
+    {
+      "role": "WOB Delivery Dispatcher",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "report": 1,
+      "export": 1,
+      "print": 1
+    },
+    {
+      "role": "WOB Delivery Driver",
+      "read": 1,
+      "print": 1
+    }
+  ]
+}

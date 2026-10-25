@@ -1,0 +1,349 @@
+{%- from "templates/print_formats/standard_macros.html" import add_header -%}
+<style>
+.wob-so-slip {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+	color: #1f2937;
+	font-size: 13px;
+	line-height: 1.5;
+}
+.wob-header-block {
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-start;
+	border-bottom: 2px solid #e5e7eb;
+	padding-bottom: 12px;
+	margin-bottom: 16px;
+}
+.wob-title {
+	font-size: 22px;
+	font-weight: 700;
+	color: #111827;
+	margin: 0;
+	text-transform: uppercase;
+	letter-spacing: 0.5px;
+}
+.wob-subtitle {
+	font-size: 14px;
+	font-weight: 600;
+	color: #4b5563;
+	margin-top: 2px;
+}
+.wob-status-badge {
+	display: inline-block;
+	padding: 4px 10px;
+	font-size: 12px;
+	font-weight: 600;
+	border-radius: 9999px;
+	background-color: #f3f4f6;
+	color: #374151;
+	border: 1px solid #d1d5db;
+}
+.wob-meta-grid {
+	display: flex;
+	gap: 16px;
+	margin-bottom: 18px;
+}
+.wob-meta-card {
+	flex: 1;
+	background-color: #f9fafb;
+	border: 1px solid #e5e7eb;
+	border-radius: 6px;
+	padding: 10px 14px;
+}
+.wob-meta-card h4 {
+	font-size: 12px;
+	font-weight: 700;
+	text-transform: uppercase;
+	color: #6b7280;
+	margin: 0 0 8px 0;
+	letter-spacing: 0.5px;
+	border-bottom: 1px solid #e5e7eb;
+	padding-bottom: 4px;
+}
+.wob-meta-row {
+	display: flex;
+	margin-bottom: 4px;
+	font-size: 12px;
+}
+.wob-meta-label {
+	width: 105px;
+	color: #6b7280;
+	flex-shrink: 0;
+}
+.wob-meta-val {
+	font-weight: 600;
+	color: #111827;
+	word-break: break-word;
+}
+.wob-table {
+	width: 100%;
+	border-collapse: collapse;
+	margin-top: 12px;
+	margin-bottom: 16px;
+}
+.wob-table th {
+	background-color: #f3f4f6;
+	color: #374151;
+	font-weight: 600;
+	font-size: 12px;
+	text-transform: uppercase;
+	padding: 8px 10px;
+	border: 1px solid #e5e7eb;
+	text-align: left;
+}
+.wob-table td {
+	padding: 8px 10px;
+	border: 1px solid #e5e7eb;
+	font-size: 12px;
+	vertical-align: top;
+}
+.wob-table tr:nth-child(even) {
+	background-color: #fafafa;
+}
+.text-right {
+	text-align: right;
+}
+.text-center {
+	text-align: center;
+}
+.wob-summary-block {
+	display: flex;
+	justify-content: space-between;
+	margin-top: 10px;
+	margin-bottom: 24px;
+}
+.wob-instructions {
+	flex: 1;
+	max-width: 55%;
+	padding: 10px;
+	background: #f9fafb;
+	border: 1px solid #e5e7eb;
+	border-radius: 6px;
+	font-size: 12px;
+}
+.wob-totals-table {
+	width: 40%;
+	border-collapse: collapse;
+}
+.wob-totals-table td {
+	padding: 6px 10px;
+	border-bottom: 1px solid #f3f4f6;
+	font-size: 13px;
+}
+.wob-totals-table tr.wob-total-highlight td {
+	font-weight: 700;
+	font-size: 14px;
+	border-top: 2px solid #111827;
+	border-bottom: 2px solid #111827;
+	background-color: #f9fafb;
+}
+.wob-sign-block {
+	display: flex;
+	gap: 24px;
+	margin-top: 32px;
+	page-break-inside: avoid;
+}
+.wob-sign-card {
+	flex: 1;
+	border: 1px solid #d1d5db;
+	border-radius: 6px;
+	padding: 12px 16px;
+	height: 110px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+.wob-sign-title {
+	font-size: 11px;
+	font-weight: 700;
+	color: #4b5563;
+	text-transform: uppercase;
+}
+.wob-sign-line {
+	border-top: 1px dashed #9ca3af;
+	display: flex;
+	justify-content: space-between;
+	font-size: 11px;
+	color: #6b7280;
+	padding-top: 4px;
+}
+</style>
+
+<div class="wob-so-slip">
+	{% if letter_head and not no_letterhead %}
+	<div class="letter-head" style="margin-bottom: 16px;">{{ letter_head }}</div>
+	{% endif %}
+
+	<div class="wob-header-block">
+		<div>
+			<h1 class="wob-title">{{ _("Sales Order Delivery Slip") }}</h1>
+			<div class="wob-subtitle">{{ doc.name }}</div>
+			{% if doc.company %}<div style="color: #6b7280; font-size: 12px; margin-top: 2px;">{{ doc.company }}</div>{% endif %}
+		</div>
+		<div style="text-align: right;">
+			<div class="wob-status-badge">{{ _(doc.custom_wob_delivery_status or doc.status or "Draft") }}</div>
+			<div style="font-size: 12px; color: #6b7280; margin-top: 6px;">
+				<b>{{ _("Order Date") }}:</b> {{ frappe.utils.format_date(doc.transaction_date) }}<br>
+				<b>{{ _("Delivery Date") }}:</b> {{ frappe.utils.format_date(doc.delivery_date) }}
+			</div>
+		</div>
+	</div>
+
+	<div class="wob-meta-grid">
+		<!-- Customer Info -->
+		<div class="wob-meta-card">
+			<h4>{{ _("Customer & Recipient") }}</h4>
+			<div class="wob-meta-row">
+				<span class="wob-meta-label">{{ _("Customer") }}:</span>
+				<span class="wob-meta-val">{{ doc.customer_name or doc.customer or "-" }}</span>
+			</div>
+			<div class="wob-meta-row">
+				<span class="wob-meta-label">{{ _("Mobile") }}:</span>
+				<span class="wob-meta-val">{{ doc.contact_mobile or doc.contact_phone or "-" }}</span>
+			</div>
+			<div class="wob-meta-row">
+				<span class="wob-meta-label">{{ _("Email") }}:</span>
+				<span class="wob-meta-val">{{ doc.contact_email or "-" }}</span>
+			</div>
+		</div>
+
+		<!-- Delivery Address -->
+		<div class="wob-meta-card">
+			<h4>{{ _("Delivery Destination") }}</h4>
+			<div class="wob-meta-row">
+				<span class="wob-meta-label">{{ _("Address") }}:</span>
+				<span class="wob-meta-val">{{ (doc.shipping_address or doc.address_display or "-") | striptags }}</span>
+			</div>
+			{% if doc.custom_wob_delivery_order %}
+			<div class="wob-meta-row">
+				<span class="wob-meta-label">{{ _("Delivery Order") }}:</span>
+				<span class="wob-meta-val">{{ doc.custom_wob_delivery_order }}</span>
+			</div>
+			{% endif %}
+			{% if doc.territory %}
+			<div class="wob-meta-row">
+				<span class="wob-meta-label">{{ _("Territory") }}:</span>
+				<span class="wob-meta-val">{{ doc.territory }}</span>
+			</div>
+			{% endif %}
+		</div>
+
+		<!-- Order Summary Info -->
+		<div class="wob-meta-card">
+			<h4>{{ _("Order & Billing") }}</h4>
+			<div class="wob-meta-row">
+				<span class="wob-meta-label">{{ _("Currency") }}:</span>
+				<span class="wob-meta-val">{{ doc.currency or "" }}</span>
+			</div>
+			<div class="wob-meta-row">
+				<span class="wob-meta-label">{{ _("Total Qty") }}:</span>
+				<span class="wob-meta-val">{{ doc.total_qty }}</span>
+			</div>
+			<div class="wob-meta-row">
+				<span class="wob-meta-label">{{ _("Grand Total") }}:</span>
+				<span class="wob-meta-val" style="color: #111827;">
+					{{ doc.currency or "" }} {{ frappe.utils.fmt_money(doc.grand_total) }}
+				</span>
+			</div>
+			{% if doc.advance_paid %}
+			<div class="wob-meta-row">
+				<span class="wob-meta-label">{{ _("Advance Paid") }}:</span>
+				<span class="wob-meta-val">{{ doc.currency or "" }} {{ frappe.utils.fmt_money(doc.advance_paid) }}</span>
+			</div>
+			{% endif %}
+		</div>
+	</div>
+
+	<!-- Items Table -->
+	<table class="wob-table">
+		<thead>
+			<tr>
+				<th class="text-center" style="width: 5%;">#</th>
+				<th style="width: 25%;">{{ _("Item Code") }}</th>
+				<th style="width: 35%;">{{ _("Item Name & Description") }}</th>
+				<th class="text-right" style="width: 12%;">{{ _("Qty") }}</th>
+				<th class="text-right" style="width: 11%;">{{ _("Rate") }}</th>
+				<th class="text-right" style="width: 12%;">{{ _("Amount") }}</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for row in doc.items %}
+				<tr>
+					<td class="text-center">{{ loop.index }}</td>
+					<td><b>{{ row.item_code }}</b></td>
+					<td>
+						<div>{{ row.item_name or row.item_code }}</div>
+						{% if row.description and row.description != row.item_name %}
+							<div style="font-size: 11px; color: #6b7280;">{{ row.description | striptags }}</div>
+						{% endif %}
+					</td>
+					<td class="text-right"><b>{{ row.qty }}</b> <span style="font-size: 11px; color: #6b7280;">{{ row.uom or row.stock_uom or "" }}</span></td>
+					<td class="text-right">{{ frappe.utils.fmt_money(row.rate or 0) }}</td>
+					<td class="text-right">{{ frappe.utils.fmt_money(row.amount or 0) }}</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+
+	<!-- Summary & Notes -->
+	<div class="wob-summary-block">
+		<div class="wob-instructions">
+			<b>{{ _("Amount in Words") }}:</b><br>
+			{{ doc.in_words or "" }}
+			{% if doc.terms %}
+				<div style="margin-top: 8px; border-top: 1px solid #e5e7eb; padding-top: 6px;">
+					<b>{{ _("Terms & Conditions") }}:</b><br>
+					{{ doc.terms | striptags }}
+				</div>
+			{% endif %}
+		</div>
+
+		<table class="wob-totals-table">
+			<tr>
+				<td class="wob-meta-label">{{ _("Net Total") }}:</td>
+				<td class="text-right"><b>{{ doc.currency or "" }} {{ frappe.utils.fmt_money(doc.net_total or doc.total) }}</b></td>
+			</tr>
+			{% if doc.total_taxes_and_charges %}
+			<tr>
+				<td class="wob-meta-label">{{ _("Taxes") }}:</td>
+				<td class="text-right">{{ doc.currency or "" }} {{ frappe.utils.fmt_money(doc.total_taxes_and_charges) }}</td>
+			</tr>
+			{% endif %}
+			{% if doc.discount_amount %}
+			<tr>
+				<td class="wob-meta-label">{{ _("Discount") }}:</td>
+				<td class="text-right">-{{ doc.currency or "" }} {{ frappe.utils.fmt_money(doc.discount_amount) }}</td>
+			</tr>
+			{% endif %}
+			<tr class="wob-total-highlight">
+				<td>{{ _("Grand Total") }}:</td>
+				<td class="text-right">
+					{{ doc.currency or "" }} {{ frappe.utils.fmt_money(doc.rounded_total or doc.grand_total) }}
+				</td>
+			</tr>
+		</table>
+	</div>
+
+	<!-- Signatures -->
+	<div class="wob-sign-block">
+		<div class="wob-sign-card">
+			<div class="wob-sign-title">{{ _("Authorized Store / Dispatch") }}</div>
+			<div style="font-size: 11px; color: #6b7280;">{{ _("Prepared & inspected by storekeeper") }}</div>
+			<div class="wob-sign-line">
+				<span>{{ _("Signature") }}</span>
+				<span>{{ _("Date & Time") }}</span>
+			</div>
+		</div>
+
+		<div class="wob-sign-card">
+			<div class="wob-sign-title">{{ _("Customer Acceptance") }}</div>
+			<div style="font-size: 11px; color: #4b5563;">
+				{{ _("Received above items in full and satisfactory condition.") }}
+			</div>
+			<div class="wob-sign-line">
+				<span>{{ _("Customer Signature") }}</span>
+				<span>{{ _("Date & Time") }}</span>
+			</div>
+		</div>
+	</div>
+</div>

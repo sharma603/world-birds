@@ -1,0 +1,132 @@
+{
+  "doctype": "DocType",
+  "name": "WOB Driver Zone Assignment",
+  "module": "Delivery Management",
+  "engine": "InnoDB",
+  "istable": 0,
+  "editable_grid": 1,
+  "track_changes": 1,
+  "fields": [
+    {
+      "fieldname": "company",
+      "label": "Company",
+      "fieldtype": "Link",
+      "options": "Company",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "delivery_zone",
+      "label": "Delivery Zone",
+      "fieldtype": "Link",
+      "options": "WOB Delivery Zone",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "driver",
+      "label": "Driver",
+      "fieldtype": "Link",
+      "options": "Driver",
+      "reqd": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "driver_user",
+      "label": "Driver User",
+      "fieldtype": "Link",
+      "options": "User",
+      "read_only": 1,
+      "in_list_view": 1
+    },
+    {
+      "fieldname": "assignment_type",
+      "label": "Assignment Type",
+      "fieldtype": "Select",
+      "options": "Primary\nSecondary",
+      "default": "Primary",
+      "reqd": 1
+    },
+    {
+      "fieldname": "active",
+      "label": "Active",
+      "fieldtype": "Check",
+      "default": "1"
+    },
+    {
+      "fieldname": "availability_status",
+      "label": "Availability Status",
+      "fieldtype": "Select",
+      "options": "Available\nBusy\nUnavailable",
+      "default": "Available",
+      "reqd": 1
+    },
+    {
+      "fieldname": "maximum_active_deliveries",
+      "label": "Maximum Active Deliveries",
+      "fieldtype": "Int"
+    },
+    {
+      "fieldname": "mapping_key",
+      "label": "Mapping Key",
+      "fieldtype": "Data",
+      "unique": 1,
+      "read_only": 1,
+      "hidden": 1
+    }
+  ],
+  "field_order": [
+    "company",
+    "delivery_zone",
+    "driver",
+    "driver_user",
+    "assignment_type",
+    "active",
+    "availability_status",
+    "maximum_active_deliveries",
+    "mapping_key"
+  ],
+  "permissions": [
+    {
+      "role": "System Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "report": 1,
+      "export": 1,
+      "print": 1
+    },
+    {
+      "role": "WOB Delivery Administrator",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "report": 1,
+      "export": 1,
+      "print": 1
+    },
+    {
+      "role": "WOB Delivery Manager",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "report": 1,
+      "export": 1,
+      "print": 1
+    },
+    {
+      "role": "WOB Delivery Dispatcher",
+      "read": 1,
+      "write": 1,
+      "create": 1,
+      "delete": 1,
+      "report": 1,
+      "export": 1,
+      "print": 1
+    }
+  ],
+  "autoname": "format:DZA-{#####}"
+}
